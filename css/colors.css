@@ -1,6 +1,7 @@
 :root {
   /* Brand colors */
   --primary: #75FB4C;       /* bright green */
+  --primary-dark: #63e13d;  /* slightly darker green for hover */
   --secondary: #51B276;     /* medium green */
   --accent: #316D60;        /* dark green */
   
@@ -10,14 +11,15 @@
   
   /* Text colors */
   --text-primary: #FFFFFF;  /* white */
-  --text-secondary: #A0AEC0;/* light gray */
+  --text-secondary: #CBD5E0;/* light gray - increased brightness */
+  --text-tertiary: #A0AEC0; /* medium gray */
   
   /* Stock colors */
   --up-trend: #75FB4C;      /* bright green */
-  --down-trend: #EF4444;    /* red */
-  --neutral: #94A3B8;       /* light gray */
+  --down-trend: #F56565;    /* brighter red for better visibility */
+  --neutral: #A0AEC0;       /* light gray */
   
   /* Chart colors */
-  --chart-up: rgba(117, 251, 76, 0.2);
-  --chart-down: rgba(239, 68, 68, 0.2);
+  --chart-up: rgba(117, 251, 76, 0.25);
+  --chart-down: rgba(245, 101, 101, 0.25);
 }

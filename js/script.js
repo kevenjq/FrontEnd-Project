@@ -54,7 +54,7 @@ const renderMarketData = (data) => {
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">${stock.symbol}</h5>
-            <p class="card-text text-muted">${stock.name}</p>
+            <p class="card-text text-secondary">${stock.name}</p>
             <div class="d-flex justify-content-between align-items-center">
               <span class="fs-4 fw-bold">$${stock.price.toFixed(2)}</span>
               <span class="${stockTrendClass}">

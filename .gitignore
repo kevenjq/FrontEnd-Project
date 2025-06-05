@@ -26,13 +26,11 @@ ehthumbs.db
 __pycache__/
 *.py[cod]
 
-# Node.js
-node_modules/
-dist/
-build/
-
 # General
 *.log
 *.tmp
 *.bak
 *.swp
+
+a
+gith
