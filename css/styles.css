@@ -1,0 +1,57 @@
+@import 'colors.css';
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.stock-up { color: var(--up-trend); }
+.stock-down { color: var(--down-trend); }
+.stock-neutral { color: var(--neutral); }
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.chart-container {
+  height: 300px;
+  position: relative;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .market-data-table {
+    font-size: 0.85rem;
+  }
+  
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .d-flex.flex-md-row {
+    flex-direction: column !important;
+  }
+}

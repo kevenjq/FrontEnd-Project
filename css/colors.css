@@ -1,0 +1,21 @@
+:root {
+  /* Brand colors */
+  --primary: #2563eb;
+  --secondary: #64748b;
+  --accent: #f97316;
+  
+  /* Stock colors */
+  --up-trend: #10b981;
+  --down-trend: #ef4444;
+  --neutral: #94a3b8;
+  
+  /* UI colors */
+  --background: #f8fafc;
+  --card-bg: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  
+  /* Chart colors */
+  --chart-up: rgba(16, 185, 129, 0.2);
+  --chart-down: rgba(239, 68, 68, 0.2);
+}
