@@ -1,21 +1,23 @@
 :root {
   /* Brand colors */
-  --primary: #2563eb;
-  --secondary: #64748b;
-  --accent: #f97316;
+  --primary: #75FB4C;       /* bright green */
+  --secondary: #51B276;     /* medium green */
+  --accent: #316D60;        /* dark green */
+  
+  /* Background colors */
+  --background: #0F1820;    /* black/blue dark */
+  --card-bg: #20262B;       /* even more black */
+  
+  /* Text colors */
+  --text-primary: #FFFFFF;  /* white */
+  --text-secondary: #A0AEC0;/* light gray */
   
   /* Stock colors */
-  --up-trend: #10b981;
-  --down-trend: #ef4444;
-  --neutral: #94a3b8;
-  
-  /* UI colors */
-  --background: #f8fafc;
-  --card-bg: #ffffff;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
+  --up-trend: #75FB4C;      /* bright green */
+  --down-trend: #EF4444;    /* red */
+  --neutral: #94A3B8;       /* light gray */
   
   /* Chart colors */
-  --chart-up: rgba(16, 185, 129, 0.2);
+  --chart-up: rgba(117, 251, 76, 0.2);
   --chart-down: rgba(239, 68, 68, 0.2);
 }

@@ -1,9 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Sen:wght@400;700;800&display=swap');
+
 @import 'colors.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background-color: var(--background);
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Amiko', sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sen', sans-serif;
+  font-weight: 700;
+}
+
+.value-display, .stock-price, .stock-change, .portfolio-value, .btn-primary {
+  font-family: 'Sen', sans-serif;
 }
 
 .stock-up { color: var(--up-trend); }
@@ -13,12 +31,14 @@ body {
 .card {
   background: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
 .chart-container {
@@ -29,6 +49,15 @@ body {
 .btn-primary {
   background-color: var(--primary);
   border-color: var(--primary);
+  color: var(--background);
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #63e13d;
+  border-color: #63e13d;
+  transform: scale(1.05);
 }
 
 .btn-outline-primary {
@@ -38,7 +67,43 @@ body {
 
 .btn-outline-primary:hover {
   background-color: var(--primary);
-  color: white;
+  color: var(--background);
+}
+
+.navbar {
+  background-color: rgba(15, 24, 32, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(49, 109, 96, 0.3);
+}
+
+.navbar-brand {
+  font-family: 'Sen', sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+.nav-link {
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.table {
+  color: var(--text-primary);
+  --bs-table-bg: transparent;
+}
+
+.table th {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.table td {
+  border-top: 1px solid rgba(49, 109, 96, 0.2);
 }
 
 /* Responsive adjustments */
@@ -54,4 +119,112 @@ body {
   .d-flex.flex-md-row {
     flex-direction: column !important;
   }
+}
+
+/* Portfolio specific styles */
+.portfolio-summary-card {
+  background: linear-gradient(135deg, #20262B 0%, #1a2025 100%);
+  border: 1px solid rgba(81, 178, 118, 0.2);
+}
+
+.portfolio-summary-card .card-title {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-summary-card .value-display {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.portfolio-change {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Stock detail page */
+.stock-header {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(49, 109, 96, 0.3);
+  margin-bottom: 2rem;
+}
+
+.stock-price-display {
+  font-size: 3.5rem;
+  font-weight: 800;
+}
+
+.stock-change-display {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Pro page */
+.pro-card {
+  background: linear-gradient(135deg, #20262B 0%, #1a2025 100%);
+  border: 1px solid rgba(81, 178, 118, 0.1);
+  transition: all 0.4s ease;
+}
+
+.pro-card:hover {
+  border-color: rgba(117, 251, 76, 0.4);
+  transform: translateY(-10px);
+}
+
+.pro-card.featured {
+  border: 2px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.pro-card.featured::after {
+  content: 'RECOMMENDED';
+  position: absolute;
+  top: 15px;
+  right: -35px;
+  background: var(--primary);
+  color: var(--background);
+  padding: 5px 35px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transform: rotate(45deg);
+}
+
+.pro-price {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.pro-feature-list li {
+  margin-bottom: 0.8rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.pro-feature-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Auth page */
+.auth-card {
+  max-width: 450px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.auth-header {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
+  padding: 2rem;
+  text-align: center;
+}
+
+.auth-body {
+  padding: 2rem;
 }

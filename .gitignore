@@ -1,0 +1,38 @@
+# Ignore public SSH keys
+*.pub
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore compiled binaries and build outputs
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# C, C++
+*.exe
+*.dll
+*.obj
+*.o
+*.so
+*.a
+*.out
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Node.js
+node_modules/
+dist/
+build/
+
+# General
+*.log
+*.tmp
+*.bak
+*.swp

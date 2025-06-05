@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   detectLocation();
   
   // Manual location change
-  document.getElementById('change-location').addEventListener('click', () => {
+  document.getElementById('change-location')?.addEventListener('click', () => {
     const newLocation = prompt('Enter country name:');
     if (newLocation) {
       locationDisplay.textContent = `Showing data for: ${newLocation}`;
