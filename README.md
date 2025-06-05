@@ -1,3 +1,9 @@
+## How to run (VS Code):
+
+1. Clone the repository with git clone
+2. Use the Live Server extention (From the index.html)
+
+
 ## 🔐 Setting Up SSH for GitHub Access (Recommended)
 
 To start a push to this project and want seamless access without repeatedly entering credentials, follow these steps to configure SSH authentication with GitHub.
