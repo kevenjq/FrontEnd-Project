@@ -16,7 +16,7 @@
     
     .team-member-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
       border-color: rgba(117, 251, 76, 0.4);
     }
     
@@ -76,7 +76,18 @@
           <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
           <li class="nav-item"><a class="nav-link" href="pro.html">Pro</a></li>
           <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="auth.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="auth.html" id="auth-link">Login</a></li>
+          <li class="nav-item d-none" id="user-menu">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <span id="user-email"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="portfolio.html">Portfolio</a></li>
+                <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -205,7 +216,7 @@
     <!-- Tech Stack -->
     <div class="card mb-5">
       <div class="card-body p-4 p-md-5">
-        <h2 class="section-header mb-4">Tech Stack</h2>
+        <h4 class="section-header mb-4">Tech Stack</h4>
         <div class="row text-center">
           <div class="col-4 col-md-2 mb-4">
             <div class="tech-stack-icon">
@@ -256,7 +267,7 @@
     <!-- Reflection -->
     <div class="card">
       <div class="card-body p-4 p-md-5">
-        <h2 class="section-header">Reflection & Acknowledgment</h2>
+        <h4 class="section-header">Reflection & Acknowledgment</h4>
         <div class="row">
           <div class="col-lg-6 mb-4 mb-lg-0">
             <p>This project helped us apply theory in a real-world scenario using agile methods. We experienced firsthand how iterative development and continuous feedback can lead to a superior product.</p>
@@ -289,10 +300,42 @@
   <!-- Footer -->
   <footer class="py-4" style="background-color: rgba(15, 24, 32, 0.98); border-top: 1px solid rgba(49, 109, 96, 0.2);">
     <div class="container text-center">
-      <p class="mb-0" style="color: var(--text-secondary);">&copy; 2025 StockMarket. All rights reserved. University of Europe for Applied Sciences Project</p>
+      <p class="mb-0" style="color: var(--text-secondary);">&copy; 2025 StockMarket. All rights reserved.</p>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Auth state monitoring -->
+  <script type="module">
+    import { monitorAuthState, logoutUser } from '../js/auth.js';
+    
+    const authLink = document.getElementById('auth-link');
+    const userMenu = document.getElementById('user-menu');
+    const userEmail = document.getElementById('user-email');
+    const logoutBtn = document.getElementById('logout-btn');
+    
+    // Monitor auth state
+    monitorAuthState((user) => {
+      if (user) {
+        // User is signed in
+        authLink.classList.add('d-none');
+        userMenu.classList.remove('d-none');
+        userEmail.textContent = user.email;
+      } else {
+        // User is signed out
+        authLink.classList.remove('d-none');
+        userMenu.classList.add('d-none');
+      }
+    });
+    
+    // Logout button
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      logoutUser().then(() => {
+        window.location.href = 'auth.html';
+      });
+    });
+  </script>
 </body>
 </html>

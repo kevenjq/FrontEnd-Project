@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stocks | StockMarket</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/colors.css">
   <link rel="stylesheet" href="../css/styles.css">
@@ -23,7 +24,18 @@
           <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
           <li class="nav-item"><a class="nav-link" href="pro.html">Pro</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="auth.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="auth.html" id="auth-link">Login</a></li>
+          <li class="nav-item d-none" id="user-menu">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <span id="user-email"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="portfolio.html">Portfolio</a></li>
+                <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -88,6 +100,39 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../js/script.js"></script>
+  
+  <!-- Auth state monitoring -->
+  <script type="module">
+    import { monitorAuthState, logoutUser } from '../js/auth.js';
+    
+    const authLink = document.getElementById('auth-link');
+    const userMenu = document.getElementById('user-menu');
+    const userEmail = document.getElementById('user-email');
+    const logoutBtn = document.getElementById('logout-btn');
+    
+    // Monitor auth state
+    monitorAuthState((user) => {
+      if (user) {
+        // User is signed in
+        authLink.classList.add('d-none');
+        userMenu.classList.remove('d-none');
+        userEmail.textContent = user.email;
+      } else {
+        // User is signed out
+        authLink.classList.remove('d-none');
+        userMenu.classList.add('d-none');
+      }
+    });
+    
+    // Logout button
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      logoutUser().then(() => {
+        window.location.href = 'auth.html';
+      });
+    });
+  </script>
+  
   <script>
     // This page specific script: load stocks table
     document.addEventListener('DOMContentLoaded', async () => {
