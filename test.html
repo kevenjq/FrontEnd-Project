@@ -1,31 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>StockMarket App Tests</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- QUnit CSS -->
-  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.0.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockMarket - QUnit Tests</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.19.4.css">
+    <style>
+        /* Custom styling to match app theme */
+        body {
+            background-color: #0F1820;
+            color: #FFFFFF;
+            font-family: 'Amiko', sans-serif;
+        }
+        #qunit-header {
+            background: linear-gradient(135deg, #20262B 0%, #1a2025 100%);
+            border-bottom: 1px solid rgba(49, 109, 96, 0.3);
+            color: #75FB4C;
+            font-family: 'Sen', sans-serif;
+            font-weight: 700;
+        }
+        #qunit-testrunner-toolbar {
+            background: #20262B;
+        }
+        #qunit-userAgent {
+            background: #20262B;
+            color: #CBD5E0;
+            border-top: 1px solid rgba(49, 109, 96, 0.3);
+        }
+        .qunit-pass > strong {
+            color: #75FB4C;
+        }
+        .qunit-fail > strong {
+            color: #F56565;
+        }
+        .test-section {
+            background: #20262B;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin: 15px 0;
+            padding: 15px;
+        }
+        .test-title {
+            color: #75FB4C;
+            margin-top: 0;
+        }
+        .test-description {
+            color: #CBD5E0;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-<body class="bg-dark text-white">
-
-  <div class="container py-5">
-    <h1 class="mb-4">StockMarket App Test Suite</h1>
+<body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-  </div>
 
-  <!-- 1) Sinon for fake timers -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/15.0.2/sinon.min.js"></script>
-  <!-- 2) Your app scripts -->
-  <script src="js/geolocation.js"></script>
-  <script src="js/script.js"></script>
-  <script type="module" src="js/auth.js"></script>
-  <!-- 3) QUnit -->
-  <script src="https://code.jquery.com/qunit/qunit-2.20.0.js"></script>
-  <!-- 4) Your tests -->
-  <script src="js/tests.js"></script>
+    <!-- Mock elements for testing -->
+    <div id="mock-dom" style="display: none;">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="../index.html">StockMarket</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pages/stocks.html">Stocks</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pages/portfolio.html">Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pages/pro.html">Pro</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pages/about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pages/auth.html">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Auth form -->
+        <form id="auth-form">
+            <input type="email" id="email" class="form-control">
+            <input type="password" id="password" class="form-control">
+            <button id="submit-btn" class="btn btn-primary">Sign In</button>
+            <div class="alert alert-danger d-none" id="error-message"></div>
+        </form>
+        
+        <!-- Portfolio elements -->
+        <div class="portfolio-summary-card">
+            <div class="value-display">$25,901</div>
+            <div class="portfolio-change stock-up">▲ $3,450 (2.87%)</div>
+        </div>
+        
+        <!-- Stock elements -->
+        <div class="stock-price">$172.35</div>
+        <div class="stock-change stock-up">▲ 2.45 (1.44%)</div>
+        <div class="chart-container"></div>
+        
+        <!-- Pro elements -->
+        <div class="pro-card">
+            <div class="pro-price">$9.99/mo</div>
+            <ul class="pro-feature-list">
+                <li>Advanced charting tools</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/qunit/qunit-2.19.4.js"></script>
+    <script>
+        // Mock functions for testing
+        const loginUser = () => {};
+        const registerUser = () => {};
+        const monitorAuthState = () => {};
+        const logoutUser = () => {};
+        const fetchMarketData = () => {};
+        const renderMarketData = () => {};
+        const detectLocation = () => {};
+    </script>
+    <script src="js/tests.js"></script>
 </body>
 </html>

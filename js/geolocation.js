@@ -1,31 +1,37 @@
+// File: js/geolocation.js (updated)
 document.addEventListener('DOMContentLoaded', () => {
   const locationDisplay = document.getElementById('location-display');
-  
-  // API PLACEHOLDER: Replace with actual geolocation API call
+
   const detectLocation = () => {
-    // Simulated API response
-    const mockLocations = ['United States', 'Germany', 'United Kingdom', 'Japan'];
-    const randomLocation = mockLocations[Math.floor(Math.random() * mockLocations.length)];
-    
-    locationDisplay.textContent = `Showing data for: ${randomLocation}`;
-    // In real implementation:
-    // fetch('https://geolocation-api.example?api_key=YOUR_KEY')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     locationDisplay.textContent = `Showing data for: ${data.country}`;
-    //     loadMarketData(data.country_code);
-    //   });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+          .then(res => res.json())
+          .then(data => {
+            const country = data.address.country || 'Unknown';
+            locationDisplay.textContent = `Showing data for: ${country}`;
+          })
+          .catch(err => {
+            locationDisplay.textContent = 'Unable to detect location';
+            console.error(err);
+          });
+      }, err => {
+        locationDisplay.textContent = 'Location permission denied';
+        console.error(err);
+      });
+    } else {
+      locationDisplay.textContent = 'Geolocation not supported';
+    }
   };
 
-  // Initial detection
   detectLocation();
-  
-  // Manual location change
+
   document.getElementById('change-location')?.addEventListener('click', () => {
     const newLocation = prompt('Enter country name:');
     if (newLocation) {
       locationDisplay.textContent = `Showing data for: ${newLocation}`;
-      // loadMarketData(newLocation);
     }
   });
 });
