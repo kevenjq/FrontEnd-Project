@@ -10,28 +10,45 @@
   <link rel="stylesheet" href="css/styles.css">
 </head> 
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark py-3 fixed-top">
+<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark py-3">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">StockMarket</a>
+      <a class="navbar-brand fw-bold" href="../index.html">StockMarket</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/stocks.html">Stocks</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/portfolio.html">Portfolio</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/pro.html">Pro</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/auth.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/auth.html" id="auth-link">Login</a></li>
+          <li class="nav-item d-none" id="user-menu">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <span id="user-email"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="portfolio.html">Portfolio</a></li>
+                <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- 🌗 Theme Toggle Button -->
+          <li class="nav-item ms-3">
+            <button class="btn " id="theme-toggle-desktop" aria-label="Toggle Theme">☀️</button>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
+
   <!-- Hero Section -->
-  <section class="py-5" style="background: linear-gradient(rgba(15, 24, 32, 0.9), rgba(15, 24, 32, 0.95)), url('https://images.unsplash.com/photo-1468254095679-bbcba94a7066?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; padding-top: 100px;">
+  <section id="hero-section" class="py-5" style="background: linear-gradient(rgba(15, 24, 32, 0.9), rgba(15, 24, 32, 0.95)), url('https://images.unsplash.com/photo-1468254095679-bbcba94a7066?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; padding-top: 100px;">
     <div class="container text-center py-5">
       <h1 class="display-4 fw-bold mb-3">Real-time Market Insights</h1>
       <p class="lead mb-4" style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Track stocks based on your location and market trends with our powerful analytics platform</p>
@@ -68,11 +85,11 @@
   </section>
 
   <!-- Features Section -->
-  <section class="py-5" style="background-color: rgba(32, 38, 43, 0.6);">
+  <section class="py-5" style="background: var(--card-bg);">
     <div class="container">
       <div class="text-center mb-5">
         <h2 class="mb-3">Powerful Investment Tools</h2>
-        <p class="text-secondary" style="max-width: 700px; margin: 0 auto;">Access advanced analytics and real-time data to make informed investment decisions</p>
+        <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Access advanced analytics and real-time data to make informed investment decisions</p>
       </div>
 
       <div class="row">
@@ -110,16 +127,16 @@
   </section>
 
   <!-- Footer -->
-  <footer class="py-5" style="background-color: rgba(15, 24, 32, 0.98); border-top: 1px solid rgba(49, 109, 96, 0.2);">
+  <footer class="py-5 text-white" style="background-color: rgba(15, 24, 32, 0.98); border-top: 1px solid rgba(49, 109, 96, 0.2); ">
     <div class="container">
       <div class="row">
         <div class="col-md-4 mb-4">
-          <h3 class="mb-3">StockMarket</h3>
-          <p style="color: var(--text-secondary);">Advanced stock market analytics platform for investors of all levels.</p>
+          <h3 class="mb-3 text-white">StockMarket</h3>
+          <p>Advanced stock market analytics platform for investors of all levels.</p>
         </div>
 
         <div class="col-md-2 mb-4">
-          <h5 class="mb-3">Navigation</h5>
+          <h5 class="mb-3 text-white">Navigation</h5>
           <ul class="list-unstyled">
             <li class="mb-2"><a href="index.html" class="text-decoration-none">Home</a></li>
             <li class="mb-2"><a href="pages/stocks.html" class="text-decoration-none">Stocks</a></li>
@@ -129,7 +146,7 @@
         </div>
 
         <div class="col-md-2 mb-4">
-          <h5 class="mb-3">Resources</h5>
+          <h5 class="mb-3 text-white">Resources</h5>
           <ul class="list-unstyled">
             <li class="mb-2"><a href="#" class="text-decoration-none">Market News</a></li>
             <li class="mb-2"><a href="#" class="text-decoration-none">Learning Center</a></li>
@@ -139,8 +156,8 @@
         </div>
 
         <div class="col-md-4 mb-4">
-          <h5 class="mb-3">Subscribe to Newsletter</h5>
-          <p style="color: var(--text-secondary);">Get the latest market insights and updates.</p>
+          <h5 class="mb-3 text-white">Subscribe to Newsletter</h5>
+          <p>Get the latest market insights and updates.</p>
           <div class="input-group">
             <input type="email" class="form-control" placeholder="Your email address">
             <button class="btn btn-primary">Subscribe</button>
@@ -151,7 +168,7 @@
       <hr class="my-4" style="border-color: rgba(49, 109, 96, 0.2);">
 
       <div class="text-center pt-2">
-        <p style="color: var(--text-secondary);">&copy; 2025 StockMarket. All rights reserved.</p>
+        <p>&copy; 2025 StockMarket. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -159,5 +176,47 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/geolocation.js"></script>
   <script src="js/script.js"></script>
+  <script>
+    const toggleButtons = [
+      document.getElementById('theme-toggle'),
+      document.getElementById('theme-toggle-desktop')
+    ].filter(Boolean);
+
+    const hero = document.getElementById('hero-section');
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+
+      // Update toggle button icons
+      toggleButtons.forEach(btn => {
+        btn.textContent = theme === 'light' ? '🌙' : '☀️';
+      });
+
+      // Adjust hero background based on theme
+      if (hero) {
+        if (theme === 'light') {
+          hero.style.background = "url('https://images.unsplash.com/photo-1468254095679-bbcba94a7066?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')";
+        } else {
+          hero.style.background = "linear-gradient(rgba(15, 24, 32, 0.9), rgba(15, 24, 32, 0.95)), url('https://images.unsplash.com/photo-1468254095679-bbcba94a7066?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')";
+        }
+        hero.style.backgroundSize = 'cover';
+      }
+    }
+
+    // Initialize theme on page load
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
+    // Theme toggle handler
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(newTheme);
+      });
+    });
+  </script>
+
 </body>
 </html>

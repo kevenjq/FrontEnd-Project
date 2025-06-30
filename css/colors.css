@@ -13,7 +13,7 @@
   --text-primary: #FFFFFF;  /* white */
   --text-secondary: #CBD5E0;/* light gray - increased brightness */
   --text-tertiary: #A0AEC0; /* medium gray */
-  
+
   /* Stock colors */
   --up-trend: #75FB4C;      /* bright green */
   --down-trend: #F56565;    /* brighter red for better visibility */
@@ -22,4 +22,30 @@
   /* Chart colors */
   --chart-up: rgba(117, 251, 76, 0.25);
   --chart-down: rgba(245, 101, 101, 0.25);
+}
+
+[data-theme="light"] {
+  /* Brand colors (optional overrides for light mode) */
+  --primary: #4caf50;
+  --primary-dark: #388e3c;
+  --secondary: #81c784;
+  --accent: #2e7d32;
+
+  /* Background colors */
+  --background: #ffffff;
+  --card-bg: #f4f4f4;
+
+  /* Text colors */
+  --text-primary: #1a202c;
+  --text-secondary: #2d2f33;
+  --text-tertiary: #718096;
+
+  /* Stock colors */
+  --up-trend: #38a169;
+  --down-trend: #e53e3e;
+  --neutral: #718096;
+
+  /* Chart colors */
+  --chart-up: rgba(56, 161, 105, 0.25);
+  --chart-down: rgba(229, 62, 62, 0.25);
 }

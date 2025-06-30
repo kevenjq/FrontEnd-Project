@@ -97,8 +97,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-link {
   font-weight: 600;
-  transition: color 0.3s ease;
-  color: var(--text-secondary);
+  transition: color 0.2s ease;
+  color: #ffffff;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -150,7 +150,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Portfolio specific styles */
 .portfolio-summary-card {
-  background: linear-gradient(135deg, #20262B 0%, #1a2025 100%);
+  background: var(--background);
   border: 1px solid rgba(81, 178, 118, 0.2);
 }
 
@@ -264,11 +264,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Footer */
 footer {
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 footer a {
-  color: var(--text-secondary);
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
 }
