@@ -18,7 +18,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link active" href="stocks.html">Stocks</a></li>
           <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
@@ -35,6 +35,11 @@
                 <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
               </ul>
             </div>
+          </li>
+
+          <!-- 🌗 Theme Toggle Button -->
+          <li class="nav-item ms-3">
+            <button class="btn " id="theme-toggle-desktop" aria-label="Toggle Theme">☀️</button>
           </li>
         </ul>
       </div>
@@ -165,5 +170,36 @@
       });
     });
   </script>
+  <script>
+    const toggleButtons = [
+      document.getElementById('theme-toggle'),
+      document.getElementById('theme-toggle-desktop')
+    ].filter(Boolean);
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+
+      // Update toggle button icons
+      toggleButtons.forEach(btn => {
+        btn.textContent = theme === 'light' ? '🌙' : '☀️';
+      });
+    }
+
+    // Apply saved theme on page load
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
+    // Add click handlers for toggle buttons
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(newTheme);
+      });
+    });
+  </script>
+
+
 </body>
 </html>

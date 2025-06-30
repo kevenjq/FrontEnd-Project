@@ -18,13 +18,29 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="stocks.html">Stocks</a></li>
           <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
           <li class="nav-item"><a class="nav-link" href="pro.html">Pro</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link active" href="auth.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link active" href="auth.html" id="auth-link">Login</a></li>
+          <li class="nav-item d-none" id="user-menu">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <span id="user-email"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="portfolio.html">Portfolio</a></li>
+                <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- 🌗 Theme Toggle Button -->
+          <li class="nav-item ms-3">
+            <button class="btn " id="theme-toggle-desktop" aria-label="Toggle Theme">☀️</button>
+          </li>
         </ul>
       </div>
     </div>
@@ -201,6 +217,35 @@
           return 'Authentication failed. Please try again';
       }
     }
+  </script>
+  <script>
+    const toggleButtons = [
+      document.getElementById('theme-toggle'),
+      document.getElementById('theme-toggle-desktop')
+    ].filter(Boolean);
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+
+      // Update toggle button icons
+      toggleButtons.forEach(btn => {
+        btn.textContent = theme === 'light' ? '🌙' : '☀️';
+      });
+    }
+
+    // Apply saved theme on page load
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
+    // Add click handlers for toggle buttons
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(newTheme);
+      });
+    });
   </script>
 </body>
 </html>

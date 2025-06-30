@@ -70,7 +70,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="stocks.html">Stocks</a></li>
           <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
@@ -87,6 +87,11 @@
                 <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
               </ul>
             </div>
+          </li>
+
+          <!-- 🌗 Theme Toggle Button -->
+          <li class="nav-item ms-3">
+            <button class="btn " id="theme-toggle-desktop" aria-label="Toggle Theme">☀️</button>
           </li>
         </ul>
       </div>
@@ -337,5 +342,34 @@
       });
     });
   </script>
+
+  <script>
+    const toggleButtons = [
+      document.getElementById('theme-toggle'),
+      document.getElementById('theme-toggle-desktop')
+    ].filter(Boolean); // handles if only one toggle exists
+
+    // Initialize theme on page load based on localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      toggleButtons.forEach(btn => btn.textContent = '🌙');
+    } else {
+      // Default is dark theme per your :root
+      document.documentElement.setAttribute('data-theme', 'dark');
+      toggleButtons.forEach(btn => btn.textContent = '☀️');
+    }
+
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const newTheme = isLight ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        toggleButtons.forEach(b => b.textContent = newTheme === 'light' ? '🌙' : '☀️');
+      });
+    });
+  </script>
+
 </body>
 </html>
