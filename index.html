@@ -177,6 +177,7 @@
   <script src="js/geolocation.js"></script>
   <script src="js/script.js"></script>
   <script>
+    // Existing theme toggle code
     const toggleButtons = [
       document.getElementById('theme-toggle'),
       document.getElementById('theme-toggle-desktop')
@@ -188,12 +189,10 @@
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
 
-      // Update toggle button icons
       toggleButtons.forEach(btn => {
         btn.textContent = theme === 'light' ? '🌙' : '☀️';
       });
 
-      // Adjust hero background based on theme
       if (hero) {
         if (theme === 'light') {
           hero.style.background = "url('https://images.unsplash.com/photo-1468254095679-bbcba94a7066?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')";
@@ -204,11 +203,9 @@
       }
     }
 
-    // Initialize theme on page load
     const savedTheme = localStorage.getItem('theme') || 'dark';
     applyTheme(savedTheme);
 
-    // Theme toggle handler
     toggleButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -216,7 +213,65 @@
         applyTheme(newTheme);
       });
     });
-  </script>
 
+    // NEW: Function to load market overview data
+    async function loadMarketOverview() {
+      const container = document.getElementById('market-overview');
+      if (!container) return;
+
+      // Show loading state
+      container.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <div class="spinner-border" role="status" style="color: var(--primary);"></div>
+          <p class="mt-3">Loading market data...</p>
+        </div>
+      `;
+
+      try {
+        // Use symbols from our companyDetails in script.js
+        const symbols = ['AAPL', 'MSFT', 'GOOG', 'AMZN', 'META', 'TSLA', 'NVDA', 'JPM'];
+        const stocks = await fetchMarketData(symbols);
+
+        // Clear container and populate cards
+        container.innerHTML = '';
+        
+        stocks.forEach(stock => {
+          const trendClass = stock.change >= 0 ? 'stock-up' : 'stock-down';
+          const trendIcon = stock.change >= 0 ? '▲' : '▼';
+          
+          const card = document.createElement('div');
+          card.className = 'col-md-3 mb-4';
+          card.innerHTML = `
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">${stock.symbol}</h5>
+                <p class="card-text" style="color: var(--text-secondary);">${stock.name}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h3 class="mb-0">$${stock.price.toFixed(2)}</h3>
+                  <span class="${trendClass} fs-5">${trendIcon} ${Math.abs(stock.changePercent).toFixed(2)}%</span>
+                </div>
+                <div class="mt-2">
+                  <small class="text-muted">Open: $${stock.open.toFixed(2)}</small>
+                </div>
+              </div>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (error) {
+        console.error('Error loading market overview:', error);
+        container.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <div class="alert alert-danger">
+              Failed to load market data. Please try again later.
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Load market overview when page is ready
+    document.addEventListener('DOMContentLoaded', loadMarketOverview);
+  </script>
 </body>
 </html>

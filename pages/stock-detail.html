@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stock Detail | StockMarket</title>
-  <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/colors.css">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Sen:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/colors.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .chart-container {
+      height: 400px;
+      position: relative;
+    }
+    
+    .stock-change {
+      font-weight: 700;
+    }
+    
+    .key-info-table th {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    
+    .key-info-table td {
+      text-align: right;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+      .stock-price-display {
+        font-size: 2.5rem;
+      }
+      
+      .stock-change-display {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark py-3">
     <div class="container">
       <a class="navbar-brand fw-bold" href="../index.html">StockMarket</a>
@@ -18,7 +47,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="stocks.html">Stocks</a></li>
           <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
@@ -27,72 +56,117 @@
           <li class="nav-item"><a class="nav-link" href="auth.html" id="auth-link">Login</a></li>
           <li class="nav-item d-none" id="user-menu">
             <div class="dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                <span id="user-email"></span>
-              </a>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><span id="user-email"></span></a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="portfolio.html">Portfolio</a></li>
                 <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
               </ul>
             </div>
           </li>
+          <li class="nav-item ms-3">
+            <button class="btn" id="theme-toggle-desktop" aria-label="Toggle Theme">☀️</button>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Main Content -->
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-8">
         <div class="card mb-4">
           <div class="card-body">
-            <h2 id="stock-symbol">AAPL</h2>
-            <h3 id="stock-name">Apple Inc.</h3>
+            <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+              <div>
+                <h2 id="stock-symbol" class="mb-0">AAPL</h2>
+                <h3 id="stock-name" class="text-muted">Apple Inc.</h3>
+              </div>
+              <div class="mt-3 mt-md-0">
+                <button class="btn btn-outline-primary me-2">
+                  <i class="bi bi-star"></i> Watch
+                </button>
+                <button class="btn btn-primary">
+                  <i class="bi bi-plus"></i> Add to Portfolio
+                </button>
+              </div>
+            </div>
+            
             <div class="d-flex align-items-end mb-4">
               <span class="display-3 fw-bold me-3" id="stock-price">$172.35</span>
-              <span class="fs-4" id="stock-change">▲ 2.45 (1.44%)</span>
+              <span class="fs-4 stock-up" id="stock-change">▲ 2.45 (1.44%)</span>
             </div>
             
             <div class="chart-container">
               <canvas id="price-chart"></canvas>
             </div>
+            
+            <div class="d-flex justify-content-center mt-4">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-secondary active">1D</button>
+                <button type="button" class="btn btn-outline-secondary">1W</button>
+                <button type="button" class="btn btn-outline-secondary">1M</button>
+                <button type="button" class="btn btn-outline-secondary">3M</button>
+                <button type="button" class="btn btn-outline-secondary">1Y</button>
+                <button type="button" class="btn btn-outline-secondary">All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="mb-3">About Company</h4>
+            <p id="company-description">Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software, and online services. Apple is the world's largest technology company by revenue and one of the world's most valuable companies.</p>
           </div>
         </div>
       </div>
-      
+
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body">
             <h4 class="mb-3">Key Information</h4>
-            <table class="table table-borderless">
+            <table class="table key-info-table">
               <tr><th>Market Cap</th><td id="market-cap">$2.87T</td></tr>
               <tr><th>Volume</th><td id="volume">54.3M</td></tr>
+              <tr><th>Open</th><td id="open-price">$170.10</td></tr>
+              <tr><th>Previous Close</th><td id="prev-close">$169.90</td></tr>
               <tr><th>52W High</th><td id="high">$182.94</td></tr>
               <tr><th>52W Low</th><td id="low">$124.17</td></tr>
               <tr><th>P/E Ratio</th><td id="pe">29.34</td></tr>
+              <tr><th>Dividend Yield</th><td id="dividend">0.58%</td></tr>
+              <tr><th>Beta</th><td id="beta">1.21</td></tr>
             </table>
           </div>
         </div>
         
-        <div class="card">
+        <div class="card mb-4">
           <div class="card-body">
-            <h4 class="mb-3">Related News</h4>
-            <div id="stock-news">
-              <!-- NEWS API DATA WILL BE POPULATED HERE -->
-              <div class="card mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">Apple announces new product line</h5>
-                  <p class="card-text">Apple Inc. announced a new line of products set to launch next quarter, which analysts predict will boost the company's revenue.</p>
-                  <a href="#" class="btn btn-sm btn-outline-primary">Read more</a>
-                </div>
+            <h4 class="mb-3">News & Updates</h4>
+            <div class="d-flex mb-3">
+              <div class="flex-shrink-0 me-3">
+                <div class="bg-light rounded" style="width: 60px; height: 60px;"></div>
               </div>
-              <div class="card mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">Tech stocks surge</h5>
-                  <p class="card-text">Tech stocks, including Apple, saw a significant surge in trading today following positive economic indicators.</p>
-                  <a href="#" class="btn btn-sm btn-outline-primary">Read more</a>
-                </div>
+              <div>
+                <h6 class="mb-1">Apple announces new iPhone model</h6>
+                <p class="mb-0 text-muted small">2 hours ago</p>
+              </div>
+            </div>
+            <div class="d-flex mb-3">
+              <div class="flex-shrink-0 me-3">
+                <div class="bg-light rounded" style="width: 60px; height: 60px;"></div>
+              </div>
+              <div>
+                <h6 class="mb-1">Analysts raise Apple price target</h6>
+                <p class="mb-0 text-muted small">5 hours ago</p>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="flex-shrink-0 me-3">
+                <div class="bg-light rounded" style="width: 60px; height: 60px;"></div>
+              </div>
+              <div>
+                <h6 class="mb-1">Apple partners with new supplier</h6>
+                <p class="mb-0 text-muted small">Yesterday</p>
               </div>
             </div>
           </div>
@@ -101,8 +175,7 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="py-4 bg-dark text-white">
+  <footer class="py-4">
     <div class="container text-center">
       <p>&copy; 2025 StockMarket. All rights reserved.</p>
     </div>
@@ -111,32 +184,25 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="../js/chart-loader.js"></script>
+  <script src="../js/script.js"></script>
   
-  <!-- Auth state monitoring -->
   <script type="module">
     import { monitorAuthState, logoutUser } from '../js/auth.js';
-    
     const authLink = document.getElementById('auth-link');
     const userMenu = document.getElementById('user-menu');
     const userEmail = document.getElementById('user-email');
     const logoutBtn = document.getElementById('logout-btn');
-    
-    // Monitor auth state
     monitorAuthState((user) => {
       if (user) {
-        // User is signed in
         authLink.classList.add('d-none');
         userMenu.classList.remove('d-none');
         userEmail.textContent = user.email;
       } else {
-        // User is signed out
         authLink.classList.remove('d-none');
         userMenu.classList.add('d-none');
       }
     });
-    
-    // Logout button
-    logoutBtn.addEventListener('click', (e) => {
+    logoutBtn?.addEventListener('click', (e) => {
       e.preventDefault();
       logoutUser().then(() => {
         window.location.href = 'auth.html';
@@ -145,58 +211,23 @@
   </script>
   
   <script>
-    // Get the symbol from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const symbol = urlParams.get('symbol') || 'AAPL';
-    
-    // Set the symbol in the header
-    document.getElementById('stock-symbol').textContent = symbol;
-    
-    // Mock data for the stock
-    const mockStockData = {
-      'AAPL': {
-        name: 'Apple Inc.',
-        price: 172.35,
-        change: 2.45,
-        changePercent: 1.44,
-        marketCap: '$2.87T',
-        volume: '54.3M',
-        high: '$182.94',
-        low: '$124.17',
-        pe: '29.34'
-      },
-      'MSFT': {
-        name: 'Microsoft Corp.',
-        price: 289.12,
-        change: -1.23,
-        changePercent: -0.42,
-        marketCap: '$2.19T',
-        volume: '32.1M',
-        high: '$298.76',
-        low: '$245.12',
-        pe: '34.12'
-      },
-      // ... other symbols
-    };
-    
-    // Update the page with the stock data
-    const stock = mockStockData[symbol] || mockStockData['AAPL'];
-    document.getElementById('stock-name').textContent = stock.name;
-    document.getElementById('stock-price').textContent = `$${stock.price.toFixed(2)}`;
-    
-    const trendClass = stock.change >= 0 ? 'stock-up' : 'stock-down';
-    const trendIcon = stock.change >= 0 ? '▲' : '▼';
-    const changeElement = document.getElementById('stock-change');
-    changeElement.textContent = `${trendIcon} ${Math.abs(stock.change).toFixed(2)} (${Math.abs(stock.changePercent).toFixed(2)}%)`;
-    changeElement.className = `fs-4 ${trendClass}`;
-    
-    document.getElementById('market-cap').textContent = stock.marketCap;
-    document.getElementById('volume').textContent = stock.volume;
-    document.getElementById('high').textContent = stock.high;
-    document.getElementById('low').textContent = stock.low;
-    document.getElementById('pe').textContent = stock.pe;
-    
-    // Load the chart (chart-loader.js will handle it)
+    const toggleButtons = [document.getElementById('theme-toggle-desktop')].filter(Boolean);
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      toggleButtons.forEach(btn => {
+        btn.textContent = theme === 'light' ? '🌙' : '☀️';
+      });
+    }
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(newTheme);
+      });
+    });
   </script>
 </body>
 </html>
